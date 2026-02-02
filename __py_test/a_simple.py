@@ -20,7 +20,7 @@ def match_factor(feature_value: bool, answer: str) -> float:
     # raise ValueError("answer must be yes / no / unknown")
 
 
-def update_probabilities(characters, prob, question_key, answer):
+def update_probabilities(character:dict, prob, question_key:str, answer):
     # 重み更新
     new_prob = {}
     for c in characters:
@@ -37,25 +37,39 @@ def update_probabilities(characters, prob, question_key, answer):
     return new_prob
 
 
-def choose_best_question(characters, remaining_keys):
+def choose_best_question(characters:dict, remaining_keys:list) -> str:
     best_key = None
     best_diff = float("inf")
 
     for key in remaining_keys:
-        trues = sum(c["features"][key] for c in characters)
-        falses = len(characters) - trues
-        diff = abs(trues - falses)
+        trues = sum(c["features"][key] for c in characters) # 全キャラで残ったキーの個数
+        falses = len(characters) - trues # キャラで消えたキーの個数
+        diff = abs(trues - falses) # 差分を計算
+        # キャラに設定が１０個あるとして、残ったリストが６こ。
+        # truesには、まだ残ってる質問があり、falsesには消費した質問。
+        # 6 - 4 = 2。
+
+        print(trues)
+        print(falses)
+        print(diff)
 
         if diff < best_diff:
             best_diff = diff
             best_key = key
+            # 一番diffが小さいものを採択。
 
     return best_key
 
+def collect_all_features_key(characters):
+    keys = set()
+    for c in characters:
+        keys.update(c["features"].keys())
+    return list(keys)
 
-def run_akinator(characters, threshold=0.9):
+def run_akinator(characters: dict, threshold:float =0.9):
     prob = {c["name"]: 1 / len(characters) for c in characters}
-    remaining_keys = list(characters[0]["features"].keys())
+    # remaining_keys = list(characters[0]["features"].keys())
+    remaining_keys = collect_all_features_key(characters)
 
     step = 1
     while True:
@@ -98,11 +112,15 @@ def run_akinator(characters, threshold=0.9):
 
         step += 1
 
+
 def ask_answer(question_key: str) -> str:
     while True:
-        ans = input(f"{question_key}? (yes / no / unknown): ").strip().lower()
+        ans = input(f"{question_key}? (yes (y/1) / no (n/2) / unknown (u/3)): ").strip().lower()
         if ans in ("yes", "no", "unknown"):
             return ans
+        elif ans in ("y", "1"): return "yes"
+        elif ans in ("n", "2"): return "no"
+        elif ans in ("u", "3"): return "unknown"
         print("⚠ yes / no / unknown のどれかで入力してください")
 
 
@@ -114,6 +132,10 @@ characters = [
         "features": {
             "is_human": False,
             "can_fly": True,
+            "can_use_magic": True,
+            "is_robot": True,
+            "has_pocket": True,
+            "is_color_blue": True,
         }
     },
     {
@@ -121,6 +143,8 @@ characters = [
         "features": {
             "is_human": True,
             "can_fly": True,
+            "can_use_magic": True,
+            "is_robot": False,
         }
     },
     {
@@ -128,28 +152,11 @@ characters = [
         "features": {
             "is_human": True,
             "can_fly": False,
+            "can_use_magic": False,
+            "is_robot": False,
         }
     }
 ]
 
-
-run_akinator(characters)
-
-# # 初期確率
-# prob = {c["name"]: 1 / len(characters) for c in characters}
-
-# print("初期確率")
-# for k, v in prob.items():
-#     print(k, v)
-
-# # 質問：「人間ですか？」→ yes
-# prob = update_probabilities(
-#     characters,
-#     prob,
-#     question_key="is_human",
-#     answer="yes"
-# )
-
-# print("\n質問：人間ですか？ → yes")
-# for k, v in prob.items():
-#     print(k, round(v, 3))
+if __name__ == "__main__":
+    run_akinator(characters)
