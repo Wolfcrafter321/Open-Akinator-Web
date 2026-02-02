@@ -1,4 +1,5 @@
-﻿
+﻿from pprint import pprint as pp
+
 def match_factor(feature_value: bool, answer: str) -> float:
     """
     feature_value : キャラが持つ特徴
@@ -60,12 +61,14 @@ def run_akinator(characters, threshold=0.9):
     while True:
         print(f"\n--- Step {step} ---")
 
+
         best_name = max(prob, key=prob.get)
         best_prob = prob[best_name]
 
         print("現在の確率:")
-        for k, v in prob.items():
-            print(f"  {k}: {v:.3f}")
+        pp(prob)
+        # for k, v in prob.items():
+        #     print(f"  {k}: {v:.3f}")
 
         if best_prob >= threshold:
             print(f"\n✅ 推定結果: {best_name} ({best_prob:.3f})")
@@ -76,27 +79,26 @@ def run_akinator(characters, threshold=0.9):
             print(f"最有力: {best_name} ({best_prob:.3f})")
             break
 
-        question_key = choose_best_question(characters, remaining_keys)
+        # 最有力か、質問が尽きればここでゲーム終了。
+
+        question_key = choose_best_question(characters, remaining_keys)  # 次の質問を取得。
         if question_key is None:
             print("⚠ 次の質問を選べません")
             break
+        remaining_keys.remove(question_key) # 残ってる質問キーから次の質問を削除
 
-        remaining_keys.remove(question_key)
-
-        # ★ ここが追加
-        answer = ask_answer(question_key)
+        answer = ask_answer(question_key)   # ユーザーのアンサーを取得
 
         prob = update_probabilities(
             characters,
             prob,
             question_key,
             answer
-        )
+        )   # 確立を更新。
 
         step += 1
 
-
-def ask_answer(question_key):
+def ask_answer(question_key: str) -> str:
     while True:
         ans = input(f"{question_key}? (yes / no / unknown): ").strip().lower()
         if ans in ("yes", "no", "unknown"):
