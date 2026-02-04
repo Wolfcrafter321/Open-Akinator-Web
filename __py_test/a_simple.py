@@ -25,7 +25,8 @@ def update_probabilities(character:dict, prob, question_key:str, answer):
     new_prob = {}
     for c in characters:
         name = c["name"]
-        feature_value = c["features"][question_key]
+        # feature_value = c["features"][question_key]
+        feature_value = c["features"].get(question_key, None)
         k = match_factor(feature_value, answer)
         new_prob[name] = prob[name] * k
 
@@ -42,16 +43,20 @@ def choose_best_question(characters:dict, remaining_keys:list) -> str:
     best_diff = float("inf")
 
     for key in remaining_keys:
-        trues = sum(c["features"][key] for c in characters) # 全キャラで残ったキーの個数
-        falses = len(characters) - trues # キャラで消えたキーの個数
+        trues = 0
+        falses = 0
+        # キャラが 10 人いるとし
+        # いい質問をして絞れた数が小さい方をとる。
+        # trues = sum(c["features"][key] for c in characters) # 全キャラで残ったキーの個数
+        # falses = len(characters) - trues # キャラで消えたキーの個数
+        for c in characters:
+            v = c["features"].get(key, None) # 存在しないキーの場合は安全にNoneにする。
+            if v is True: trues += 1
+            elif v is False: falses += 1
         diff = abs(trues - falses) # 差分を計算
-        # キャラに設定が１０個あるとして、残ったリストが６こ。
-        # truesには、まだ残ってる質問があり、falsesには消費した質問。
-        # 6 - 4 = 2。
 
-        print(trues)
-        print(falses)
-        print(diff)
+        # もし情報が意味のない場合、パス。(聞いても意味のない（誰も存在しない）ものなど。)
+        if trues + falses == 0: continue
 
         if diff < best_diff:
             best_diff = diff
@@ -80,9 +85,9 @@ def run_akinator(characters: dict, threshold:float =0.9):
         best_prob = prob[best_name]
 
         print("現在の確率:")
-        pp(prob)
-        # for k, v in prob.items():
-        #     print(f"  {k}: {v:.3f}")
+        # pp(prob)
+        for k, v in prob.items():
+            print(f"  {k}: {v:.3f}")
 
         if best_prob >= threshold:
             print(f"\n✅ 推定結果: {best_name} ({best_prob:.3f})")
