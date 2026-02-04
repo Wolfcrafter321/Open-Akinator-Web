@@ -71,7 +71,7 @@ def collect_all_features_key(characters):
         keys.update(c["features"].keys())
     return list(keys)
 
-def run_akinator(characters: dict, threshold:float =0.9):
+def run_akinator(characters: dict, threshold:float =0.9, debug=False):
     prob = {c["name"]: 1 / len(characters) for c in characters}
     # remaining_keys = list(characters[0]["features"].keys())
     remaining_keys = collect_all_features_key(characters)
@@ -84,10 +84,10 @@ def run_akinator(characters: dict, threshold:float =0.9):
         best_name = max(prob, key=prob.get)
         best_prob = prob[best_name]
 
-        print("現在の確率:")
+        if(debug): print("現在の確率:")
         # pp(prob)
         for k, v in prob.items():
-            print(f"  {k}: {v:.3f}")
+            if(debug): print(f"  {k}: {v:.3f}")
 
         if best_prob >= threshold:
             print(f"\n✅ 推定結果: {best_name} ({best_prob:.3f})")
@@ -141,6 +141,8 @@ characters = [
             "is_robot": True,
             "has_pocket": True,
             "is_color_blue": True,
+            "is_weight_129.3kg": True,
+            "is_cat": True,
         }
     },
     {
@@ -150,6 +152,8 @@ characters = [
             "can_fly": True,
             "can_use_magic": True,
             "is_robot": False,
+            "is_weight_129.3kg": False,
+            "has_super_power": True,
         }
     },
     {
@@ -159,9 +163,13 @@ characters = [
             "can_fly": False,
             "can_use_magic": False,
             "is_robot": False,
+            "is_weight_129.3kg": False,
+            "wearing_yellow_shirts": True,
+            "has_glasses": True,
+            "has_super_power": False,
         }
     }
 ]
 
 if __name__ == "__main__":
-    run_akinator(characters)
+    run_akinator(characters, debug=False)
