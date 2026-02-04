@@ -56,6 +56,12 @@ npm run dev
 ```bash
 npm run build
 ```
+### Python Example
+```bash
+py -m venv __py_test
+.\__py_test\Scripts\activate
+py .\__py_test\a_simple.py
+```
 
 ---
 
