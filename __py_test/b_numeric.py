@@ -1,33 +1,37 @@
 ﻿from pprint import pprint as pp
 
-def match_factor(feature_value, answer: str) -> float:
+def match_factor(feature_value, answer: float) -> float:
     """
     feature_value : キャラが持つ特徴
     answer        : 'yes', 'no', 'unknown'
     """
-    if answer == "yes":
-        return 1.0 if feature_value is True else 0.1
 
-    elif answer == "no":
-        return 1.0 if feature_value is False else 0.1
+    return 1.0 - abs(feature_value - answer)
+
+    # if answer == "yes":
+    #     return 1.0 if feature_value is True else 0.1
+
+    # elif answer == "no":
+    #     return 1.0 if feature_value is False else 0.1
 
     # elif answer == "unknown":
     #     return 1.0
 
-    else:
-        return 1.0
-
     # raise ValueError("answer must be yes / no / unknown")
 
 
-def update_probabilities(characters:dict, prob, question_key:str, answer: str) -> dict:
+def update_probabilities(characters:dict, prob, question_key:str, answer: float) -> dict:
     # 重み更新
     new_prob = {}
     for c in characters:
         name = c["name"]
-        # feature_value = c["features"][question_key]
         feature_value = c["features"].get(question_key, None)
-        k = match_factor(feature_value, answer)
+
+        if feature_value is None:
+            k = 1.0
+        else:
+            k = match_factor(feature_value, answer)
+
         new_prob[name] = prob[name] * k
 
     # 正規化
@@ -43,25 +47,12 @@ def choose_best_question(characters:list, remaining_keys:list) -> str:
     best_diff = float("inf")
 
     for key in remaining_keys:
-        trues = 0
-        falses = 0
-        # キャラが 10 人いるとし
-        # いい質問をして絞れた数が小さい方をとる。
-        # trues = sum(c["features"][key] for c in characters) # 全キャラで残ったキーの個数
-        # falses = len(characters) - trues # キャラで消えたキーの個数
-        for c in characters:
-            v = c["features"].get(key, None) # 存在しないキーの場合は安全にNoneにする。
-            if v is True: trues += 1
-            elif v is False: falses += 1
-        diff = abs(trues - falses) # 差分を計算
-
-        # もし情報が意味のない場合、パス。(聞いても意味のない（誰も存在しない）ものなど。)
-        if trues + falses == 0: continue
+        p = sum(c["features"].get(key, 0) for c in characters) / len(characters)
+        diff = abs(p - 0.5) # score が小さい質問を選ぶ
 
         if diff < best_diff:
             best_diff = diff
             best_key = key
-            # 一番diffが小さいものを採択。
 
     return best_key
 
@@ -73,7 +64,6 @@ def collect_all_features_key(characters):
 
 def run_akinator(characters: list, threshold:float = 0.9, debug=False):
     prob = {c["name"]: 1 / len(characters) for c in characters}
-    # remaining_keys = list(characters[0]["features"].keys())
     remaining_keys = collect_all_features_key(characters)
 
     step = 1
@@ -118,14 +108,12 @@ def run_akinator(characters: list, threshold:float = 0.9, debug=False):
         step += 1
 
 
-def ask_answer(question_key: str) -> str:
+def ask_answer(question_key: str) -> float:
     while True:
         ans = input(f"{question_key}? (yes (y/1) / no (n/2) / unknown (u/3)): ").strip().lower()
-        if ans in ("yes", "no", "unknown"):
-            return ans
-        elif ans in ("y", "1", "a", "z"): return "yes"
-        elif ans in ("n", "2", "b", "x"): return "no"
-        elif ans in ("u", "3", "c", "c"): return "unknown"
+        if ans in   ("yes",     "y", "1", "a", "z"): return 1.0
+        elif ans in ("no",      "n", "2", "b", "x"): return 0.0
+        elif ans in ("unknown", "u", "3", "c", "c"): return 0.5
         print("⚠ yes / no / unknown のどれかで入力してください")
 
 
@@ -135,57 +123,64 @@ characters = [
     {
         "name": "Dora",
         "features": {
-            "is_human": False,
-            "can_fly": True,
-            "can_use_magic": True,
-            "is_robot": True,
-            "has_pocket": True,
-            "is_color_blue": True,
-            "is_weight_129.3kg": True,
-            "is_cat": True,
+            "is_human": 0.1,
+            "can_fly": 0.9,
+            "can_use_magic": 0.8,
+            "is_robot": 1.0,
+            "has_pocket": 1.0,
+            "is_color_blue": 0.95,
+            "is_weight_129.3kg": 1.0,
+            "is_cat": 0.9,
+            "is_boy": 1.0,
+            "is_girl": 0.0,
         }
     },
     {
         "name": "Goku",
         "features": {
-            "is_human": True,
-            "can_fly": True,
-            "can_use_magic": True,
-            "is_robot": False,
-            "is_weight_129.3kg": False,
-            "has_super_power": True,
+            "is_human": 1.0,
+            "can_fly": 1.0,
+            "can_use_magic": 0.7,
+            "is_robot": 0.0,
+            "is_weight_129.3kg": 0.0,
+            "has_super_power": 1.0,
+            "is_boy": 1.0,
+            "is_girl": 0.0,
         }
     },
     {
         "name": "Nobi",
         "features": {
-            "is_human": True,
-            "can_fly": False,
-            "can_use_magic": False,
-            "is_robot": False,
-            "is_weight_129.3kg": False,
-            "wearing_yellow_shirts": True,
-            "has_glasses": True,
-            "has_super_power": False,
+            "is_human": 1.0,
+            "can_fly": 0.0,
+            "can_use_magic": 0.0,
+            "is_robot": 0.0,
+            "is_weight_129.3kg": 0.0,
+            "wearing_yellow_shirts": 1.0,
+            "wearing_pink_shirts": 0.0,
+            "has_glasses": 1.0,
+            "has_super_power": 0.0,
+            "is_boy": 1.0,
+            "is_girl": 0.0,
         }
     },
     {
         "name": "Shizu",
         "features": {
-            "is_human": True,
-            "can_fly": False,
-            "can_use_magic": False,
-            "is_robot": False,
-            "is_weight_129.3kg": False,
-            "wearing_yellow_shirts": False,
-            "wearing_pink_shirts": True,
-            "has_glasses": False,
-            "has_super_power": False,
-            "is_boy": False,
-            "is_girl": True,
+            "is_human": 1.0,
+            "can_fly": 0.0,
+            "can_use_magic": 0.0,
+            "is_robot": 0.0,
+            "is_weight_129.3kg": 0.0,
+            "wearing_yellow_shirts": 0.0,
+            "wearing_pink_shirts": 1.0,
+            "has_glasses": 0.0,
+            "has_super_power": 0.0,
+            "is_boy": 0.0,
+            "is_girl": 1.0,
         }
     }
 ]
 
 if __name__ == "__main__":
-    run_akinator(characters, debug=False)
+    run_akinator(characters, debug=1)
