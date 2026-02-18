@@ -1,6 +1,5 @@
 ﻿<script>
-    // export let onStart // 親から関数が渡されなかった場合に、{}を代入しておく
-    export let onStart = () => {}
+    export let onBack = () => {}
 
     function selectFile(e) {
         const file = e.target.files[0]
@@ -9,6 +8,5 @@
     }
 </script>
 
+<button on:click={onBack}>Back</button>
 <h2>Lets Edit.</h2>
-
-<input type="file" on:change={selectFile} />

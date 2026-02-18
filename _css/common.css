@@ -10,3 +10,6 @@
 .svelte-button {
     background-color: rgb(188, 236, 255);
 }
+hr {
+    margin: 20px 0 20px;
+}

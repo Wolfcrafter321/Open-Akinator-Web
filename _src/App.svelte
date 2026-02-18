@@ -33,7 +33,7 @@
 </script>
 
 
-<button on:click={() => openLoad()}>
+<!-- <button on:click={() => openLoad()}>
     <p>openLoad</p>
 </button>
 <button on:click={() => openQuestion()}>
@@ -41,19 +41,13 @@
 </button>
 <button on:click={() => openEdit()}>
     <p>openEdit</p>
-</button>
+</button> -->
+
 
 {#if screen === "load"}
-  <LoadScreen onStart={openQuestion} onEdit={openEdit}/>
+  <LoadScreen onStart={openQuestion} onEdit={openEdit} />
 {:else if screen === "question"}
-  <QuestionMode onSBack={openLoad}/>
+  <QuestionMode onBack={openLoad} />
 {:else if screen === "edit"}
-  <EditMode onSBack={openLoad}/>
+  <EditMode onBack={openLoad} />
 {/if}
-
-<style>
-    button {
-        width: 100px;
-        height: 50px;
-    }
-</style>

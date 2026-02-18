@@ -1,5 +1,6 @@
 ﻿<script>
     // export let onStart // 親から関数が渡されなかった場合に、{}を代入しておく
+    export let onEdit = () => {}
     export let onStart = () => {}
 
     function selectFile(e) {
@@ -10,5 +11,4 @@
 </script>
 
 <h2>FileSelect</h2>
-
 <input type="file" on:change={selectFile} />
