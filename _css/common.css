@@ -8,7 +8,9 @@
 }
 
 .svelte-button {
-    background-color: rgb(188, 236, 255);
+    background-color: rgb(241, 241, 241);
+    color: rgb(77, 77, 77);
+    font-weight: bolder;
 }
 hr {
     margin: 20px 0 20px;

@@ -5,3 +5,4 @@ __py_test/Scripts
 __py_test/Lib
 __py_test/Include
 __py_test/pyvenv.cfg
+.vscode/settings.json
