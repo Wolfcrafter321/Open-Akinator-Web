@@ -1,0 +1,63 @@
+﻿
+[
+    {
+        "name": "Dora",
+        "features": {
+            "is_human": 0.1,
+            "can_fly": 0.9,
+            "can_use_magic": 0.8,
+            "is_robot": 1.0,
+            "has_pocket": 1.0,
+            "is_color_blue": 0.95,
+            "is_weight_129.3kg": 1.0,
+            "is_cat": 0.9,
+            "is_boy": 1.0,
+            "is_girl": 0.0
+        }
+    },
+    {
+        "name": "Goku",
+        "features": {
+            "is_human": 1.0,
+            "can_fly": 1.0,
+            "can_use_magic": 0.7,
+            "is_robot": 0.0,
+            "is_weight_129.3kg": 0.0,
+            "has_super_power": 1.0,
+            "is_boy": 1.0,
+            "is_girl": 0.0
+        }
+    },
+    {
+        "name": "Nobi",
+        "features": {
+            "is_human": 1.0,
+            "can_fly": 0.0,
+            "can_use_magic": 0.0,
+            "is_robot": 0.0,
+            "is_weight_129.3kg": 0.0,
+            "wearing_yellow_shirts": 1.0,
+            "wearing_pink_shirts": 0.0,
+            "has_glasses": 1.0,
+            "has_super_power": 0.0,
+            "is_boy": 1.0,
+            "is_girl": 0.0
+        }
+    },
+    {
+        "name": "Shizu",
+        "features": {
+            "is_human": 1.0,
+            "can_fly": 0.0,
+            "can_use_magic": 0.0,
+            "is_robot": 0.0,
+            "is_weight_129.3kg": 0.0,
+            "wearing_yellow_shirts": 0.0,
+            "wearing_pink_shirts": 1.0,
+            "has_glasses": 0.0,
+            "has_super_power": 0.0,
+            "is_boy": 0.0,
+            "is_girl": 1.0
+        }
+    }
+]

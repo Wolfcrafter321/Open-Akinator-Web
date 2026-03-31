@@ -1,5 +1,8 @@
 ﻿<script>
     export let onBack = () => {}
+    export let data = null
+
+    console.log(data)
 </script>
 
 <button on:click={onBack}>Back</button>
