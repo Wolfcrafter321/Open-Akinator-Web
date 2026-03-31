@@ -1,0 +1,27 @@
+﻿
+[
+    {
+        "name": "Dog",
+        "features": {
+            "can_fly": 0.0,
+            "does_bark": 1.0,
+            "say_meow": 0.0
+        }
+    },
+    {
+        "name": "Cat",
+        "features": {
+            "can_fly": 0.0,
+            "does_bark": 0.3,
+            "say_meow": 1.0
+        }
+    },
+    {
+        "name": "Bird",
+        "features": {
+            "can_fly": 1.0,
+            "does_bark": 0.0,
+            "say_meow": 0.0
+        }
+    }
+]

@@ -12,8 +12,16 @@
             const reader = new FileReader()
             reader.onload = (e) => {
                 const text = e.target.result
+                try {
+                    JSON.parse(text)
+                } catch (error) {
+                    alert("ファイルを読み込めませんでした。")
+                    console.log(error)
+                    return
+                }
+                let parsedData = JSON.parse(text)
                 onStart(
-                    {"data": text, "count": data["count"]+1}
+                    {"data": parsedData, "count": data["count"]+1}
                 )
             }
             reader.readAsText(file)
@@ -21,11 +29,21 @@
         else alert("ファイルが選択されませんでした")
     }
 
-    function onStartDemo(e) {
-        const file = {"name": "DEMO", "type": "application/json"}
-        onStart(
-            {"data": file, "count": data["count"]+1}
-        )
+    async function onStartDemo(e) {
+        try {
+            const res = await fetch("/_src/data/data demo.json")
+            const json = await res.json()
+
+            onStart({
+                data: json,
+                count: data["count"] + 1
+            })
+        }
+        catch (err) {
+            alert("DEMOデータの読み込みに失敗しました")
+            console.error(err)
+            return
+        }
     }
 </script>
 
