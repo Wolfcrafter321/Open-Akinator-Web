@@ -9,32 +9,13 @@
     function matchFactor(featureVal, answer){
         return 1.0 - Math.abs(featureVal - answer)
     }
+    
+    function entropy(p){
 
-    // function updateProbabilities(characters, prob, questionKey, answer){
-    //     let newProb = {}
+        if(p === 0 || p === 1) return 0
 
-    //     for (const c of characters){
-    //         const name = c.name
-    //         const featureVal = c.features[questionKey]
-
-    //         let k;
-    //         if (featureVal === undefined){
-    //             k = 1.0
-    //         } else {
-    //             k = matchFactor(featureVal, answer)
-    //         }
-
-    //         newProb[name] = prob[name] * k
-    //     }
-
-    //     // normalize
-    //     const total = Object.values(newProb).reduce((a, b) => a + b, 0)
-    //     for (const name in newProb){
-    //         newProb[name] /= total
-    //     }
-
-    //     return newProb
-    // }
+        return -p * Math.log2(p) - (1-p) * Math.log2(1-p)
+    }
     
     function updateProbabilities(characters, prob, questionKey, answer){
         let newProb = {}
@@ -69,25 +50,36 @@
         return newProb
     }
 
-    function chooseBestQuestion(characters, remainingKeys){
+    // function chooseBestQuestion(characters, remainingKeys){
+    function chooseBestQuestion(characters, remainingKeys, prob){
         let bestKey = null
-        let bestDiff = Infinity
+        let bestScore = -Infinity
 
         for (const key of remainingKeys){
            
-            let sum = 0
+            let p
+
+            // let sum = 0
+            // for(const c of characters){
+            //     sum += (c.features[key] ?? 0)
+            // }
+            // p = sum / characters.length
+            
+            // p = Σ (prob[character] * feature_value)
+            p = 0
             for(const c of characters){
-                sum += (c.features[key] ?? 0)
+                const val = c.features[key] ?? 0
+                p += (prob[c.name] ?? 0) * val
             }
-            const p = sum / characters.length
 
-            const diff = Math.abs(p - 0.5)
+            const score = entropy(p)
 
-            if (diff  < bestDiff){
-                bestDiff = diff
+            if(score > bestScore){
+                bestScore = score
                 bestKey = key
             }
         }
+
 
         return bestKey
     }
@@ -151,7 +143,8 @@
             return
         }
 
-        currentQuestion = chooseBestQuestion(data["data"], remainingKeys)
+        // currentQuestion = chooseBestQuestion(data["data"], remainingKeys)
+        currentQuestion = chooseBestQuestion(data["data"], remainingKeys, prob)
         remainingKeys = remainingKeys.filter(k => k !== currentQuestion)
 
         console.log(prob)
@@ -181,7 +174,7 @@
 <p>質問 : {currentQuestion}</p>
 <button on:click={()=>{answer(1.0)}}>はい</button>
 <button on:click={()=>{answer(0.0)}}>いいえ</button>
-<button on:click={()=>{answer(0.2)}}>どうだろう、わからない</button>
+<button on:click={()=>{answer(0.5)}}>どうだろう、わからない</button>
 {:else if app_status === "finished"}
 <p>答えは、{result}ですね！</p>
 <button on:click={()=>{}}>はい</button>
