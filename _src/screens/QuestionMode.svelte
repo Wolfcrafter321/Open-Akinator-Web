@@ -188,7 +188,7 @@
 <button on:click={()=>{}}>いいえ</button>
 <button on:click={()=>{runAkinator(data["data"])}}>もういちど</button>
 {:else if app_status === "no_more_questions"}
-<p>尽力つきました...。答えは、{result}ですね？</p>
+<p>尽力つきました...。答えは、{result}ですか？</p>
 <button on:click={()=>{}}>はい</button>
 <button on:click={()=>{}}>いいえ</button>
 <button on:click={()=>{runAkinator(data["data"])}}>もういちど</button>

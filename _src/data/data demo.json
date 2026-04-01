@@ -12,7 +12,7 @@
         "name": "Cat",
         "features": {
             "can_fly": 0.0,
-            "does_bark": 0.3,
+            "does_bark": 0.1,
             "say_meow": 1.0
         }
     },
