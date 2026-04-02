@@ -1,27 +1,184 @@
-﻿
-[
+﻿[
     {
         "name": "Dog",
         "features": {
             "can_fly": 0.0,
+            "can_swim": 0.6,
+            "lives_in_water": 0.0,
+            "is_pet": 1.0,
+            "is_large": 0.5,
+            "has_stripes": 0.0,
             "does_bark": 1.0,
-            "say_meow": 0.0
+            "say_meow": 0.0,
+            "lays_eggs": 0.0
         }
     },
     {
         "name": "Cat",
         "features": {
             "can_fly": 0.0,
-            "does_bark": 0.1,
-            "say_meow": 1.0
+            "can_swim": 0.1,
+            "lives_in_water": 0.0,
+            "is_pet": 1.0,
+            "is_large": 0.2,
+            "has_stripes": 0.3,
+            "does_bark": 0.0,
+            "say_meow": 1.0,
+            "lays_eggs": 0.0
         }
     },
     {
         "name": "Bird",
         "features": {
             "can_fly": 1.0,
+            "can_swim": 0.2,
+            "lives_in_water": 0.0,
+            "is_pet": 0.3,
+            "is_large": 0.2,
+            "has_stripes": 0.0,
             "does_bark": 0.0,
-            "say_meow": 0.0
+            "say_meow": 0.0,
+            "lays_eggs": 1.0
+        }
+    },
+    {
+        "name": "Eagle",
+        "features": {
+            "can_fly": 1.0,
+            "can_swim": 0.1,
+            "lives_in_water": 0.0,
+            "is_pet": 0.0,
+            "is_large": 0.7,
+            "has_stripes": 0.0,
+            "does_bark": 0.0,
+            "say_meow": 0.0,
+            "lays_eggs": 1.0
+        }
+    },
+    {
+        "name": "Penguin",
+        "features": {
+            "can_fly": 0.0,
+            "can_swim": 1.0,
+            "lives_in_water": 0.8,
+            "is_pet": 0.0,
+            "is_large": 0.4,
+            "has_stripes": 0.0,
+            "does_bark": 0.0,
+            "say_meow": 0.0,
+            "lays_eggs": 1.0
+        }
+    },
+    {
+        "name": "Dolphin",
+        "features": {
+            "can_fly": 0.0,
+            "can_swim": 1.0,
+            "lives_in_water": 1.0,
+            "is_pet": 0.0,
+            "is_large": 0.8,
+            "has_stripes": 0.0,
+            "does_bark": 0.0,
+            "say_meow": 0.0,
+            "lays_eggs": 0.0
+        }
+    },
+    {
+        "name": "Shark",
+        "features": {
+            "can_fly": 0.0,
+            "can_swim": 1.0,
+            "lives_in_water": 1.0,
+            "is_pet": 0.0,
+            "is_large": 0.9,
+            "has_stripes": 0.1,
+            "does_bark": 0.0,
+            "say_meow": 0.0,
+            "lays_eggs": 0.3
+        }
+    },
+    {
+        "name": "Tiger",
+        "features": {
+            "can_fly": 0.0,
+            "can_swim": 0.4,
+            "lives_in_water": 0.0,
+            "is_pet": 0.0,
+            "is_large": 0.9,
+            "has_stripes": 1.0,
+            "does_bark": 0.0,
+            "say_meow": 0.3,
+            "lays_eggs": 0.0
+        }
+    },
+    {
+        "name": "Elephant",
+        "features": {
+            "can_fly": 0.0,
+            "can_swim": 0.5,
+            "lives_in_water": 0.0,
+            "is_pet": 0.0,
+            "is_large": 1.0,
+            "has_stripes": 0.0,
+            "does_bark": 0.0,
+            "say_meow": 0.0,
+            "lays_eggs": 0.0
+        }
+    },
+    {
+        "name": "Horse",
+        "features": {
+            "can_fly": 0.0,
+            "can_swim": 0.6,
+            "lives_in_water": 0.0,
+            "is_pet": 0.5,
+            "is_large": 0.8,
+            "has_stripes": 0.0,
+            "does_bark": 0.0,
+            "say_meow": 0.0,
+            "lays_eggs": 0.0
+        }
+    },
+    {
+        "name": "Snake",
+        "features": {
+            "can_fly": 0.0,
+            "can_swim": 0.4,
+            "lives_in_water": 0.1,
+            "is_pet": 0.2,
+            "is_large": 0.3,
+            "has_stripes": 0.2,
+            "does_bark": 0.0,
+            "say_meow": 0.0,
+            "lays_eggs": 0.8
+        }
+    },
+    {
+        "name": "Frog",
+        "features": {
+            "can_fly": 0.0,
+            "can_swim": 0.9,
+            "lives_in_water": 0.7,
+            "is_pet": 0.1,
+            "is_large": 0.1,
+            "has_stripes": 0.1,
+            "does_bark": 0.0,
+            "say_meow": 0.0,
+            "lays_eggs": 1.0
+        }
+    },
+    {
+        "name": "Bat",
+        "features": {
+            "can_fly": 1.0,
+            "can_swim": 0.1,
+            "lives_in_water": 0.0,
+            "is_pet": 0.0,
+            "is_large": 0.2,
+            "has_stripes": 0.0,
+            "does_bark": 0.0,
+            "say_meow": 0.0,
+            "lays_eggs": 0.0
         }
     }
 ]

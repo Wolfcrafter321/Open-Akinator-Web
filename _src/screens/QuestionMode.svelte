@@ -1,4 +1,6 @@
 ﻿<script>
+    import ProbabilityView from '/_src/screens/ProbabilityView.svelte'
+
     import { onMount } from "svelte";
 
     export let onBack = () => {}
@@ -167,25 +169,51 @@
 
 </script>
 
+
+
+<div class="content">
+    <div class="left">
+
 <button on:click={onBack}>Back</button>
 <h2>Now Akinate!</h2>
 
-{#if app_status === "asking"}
-<p>質問 : {currentQuestion}</p>
-<button on:click={()=>{answer(1.0)}}>はい</button>
-<button on:click={()=>{answer(0.0)}}>いいえ</button>
-<button on:click={()=>{answer(0.5)}}>どうだろう、わからない</button>
-{:else if app_status === "finished"}
-<p>答えは、{result}ですね！</p>
-<button on:click={()=>{}}>はい</button>
-<button on:click={()=>{}}>いいえ</button>
-<button on:click={()=>{runAkinator(data["data"])}}>もういちど</button>
-{:else if app_status === "no_more_questions"}
-<p>尽力つきました...。答えは、{result}ですか？</p>
-<button on:click={()=>{}}>はい</button>
-<button on:click={()=>{}}>いいえ</button>
-<button on:click={()=>{runAkinator(data["data"])}}>もういちど</button>
-{:else}
-<p>おっと... 想定外の結果となりました。</p>
-<button on:click={()=>{runAkinator(data["data"])}}>もういちど</button>
-{/if}
+        {#if app_status === "asking"}
+        <p>質問 : {currentQuestion}</p>
+        <button on:click={()=>{answer(1.0)}}>はい</button>
+        <button on:click={()=>{answer(0.0)}}>いいえ</button>
+        <button on:click={()=>{answer(0.5)}}>どうだろう、わからない</button>
+        {:else if app_status === "finished"}
+        <p>答えは、{result}ですね！</p>
+        <button on:click={()=>{}}>はい</button>
+        <button on:click={()=>{}}>いいえ</button>
+        <button on:click={()=>{runAkinator(data["data"])}}>もういちど</button>
+        {:else if app_status === "no_more_questions"}
+        <p>尽力つきました...。答えは、{result}ですか？</p>
+        <button on:click={()=>{}}>はい</button>
+        <button on:click={()=>{}}>いいえ</button>
+        <button on:click={()=>{runAkinator(data["data"])}}>もういちど</button>
+        {:else}
+        <p>おっと... 想定外の結果となりました。</p>
+        <button on:click={()=>{runAkinator(data["data"])}}>もういちど</button>
+        {/if}
+    </div>
+    <div class="right">
+        <ProbabilityView {prob} />
+    </div>
+</div>
+
+<style>
+.content{
+display:flex;
+gap:60px;
+align-items:flex-start;
+}
+
+.left{
+width:400px;
+}
+
+.right{
+width:420px;
+}
+</style>
