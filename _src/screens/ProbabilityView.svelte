@@ -1,35 +1,33 @@
 ﻿<script>
     export let prob = {}
     let entries = []
+    export let maxItems = 10
 
     console.log(prob)
 
     $: entries = Object.entries(prob)
         .sort((a,b)=> b[1]-a[1])
-        .slice(0,10)
+        .slice(0,maxItems)
 </script>
 
 
 <div class="panel">
-<h3>推論状況</h3>
+    <h3>推論状況</h3>
 
-{#each entries as [name, p]}
+    {#each entries as [name, p]}
+    <div class="row">
 
-<div class="row">
+        <div class="name">{name}</div>
+        <div class="bar">
+        <div class="fill" style="width:{p*100}%"></div>
+        </div>
 
-<div class="name">{name}</div>
-<div class="bar">
-<div class="fill" style="width:{p*100}%"></div>
-</div>
+        <div class="value">
+        {(p*100).toFixed(1)}%
+        </div>
 
-<div class="value">
-{(p*100).toFixed(1)}%
-</div>
-
-</div>
-
-{/each}
-
+    </div>
+    {/each}
 </div>
 
 <style>

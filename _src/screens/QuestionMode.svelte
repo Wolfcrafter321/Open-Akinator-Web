@@ -173,32 +173,32 @@
 
 <div class="content">
     <div class="left">
-
-<button on:click={onBack}>Back</button>
-<h2>Now Akinate!</h2>
+        <button on:click={onBack}>Back</button>
+        <h2>Now Akinate!</h2>
 
         {#if app_status === "asking"}
-        <p>質問 : {currentQuestion}</p>
-        <button on:click={()=>{answer(1.0)}}>はい</button>
-        <button on:click={()=>{answer(0.0)}}>いいえ</button>
-        <button on:click={()=>{answer(0.5)}}>どうだろう、わからない</button>
+            <p class="message">質問 : {currentQuestion}</p>
+            <button on:click={()=>{answer(1.0)}}>はい</button>
+            <button on:click={()=>{answer(0.0)}}>いいえ</button>
+            <button on:click={()=>{answer(0.5)}}>どうだろう、わからない</button>
         {:else if app_status === "finished"}
-        <p>答えは、{result}ですね！</p>
-        <button on:click={()=>{}}>はい</button>
-        <button on:click={()=>{}}>いいえ</button>
-        <button on:click={()=>{runAkinator(data["data"])}}>もういちど</button>
+            <p class="message">答えは、{result}ですね！</p>
+            <button on:click={()=>{}}>はい</button>
+            <button on:click={()=>{}}>いいえ</button>
+            <button on:click={()=>{runAkinator(data["data"])}}>もういちど</button>
         {:else if app_status === "no_more_questions"}
-        <p>尽力つきました...。答えは、{result}ですか？</p>
-        <button on:click={()=>{}}>はい</button>
-        <button on:click={()=>{}}>いいえ</button>
-        <button on:click={()=>{runAkinator(data["data"])}}>もういちど</button>
+            <p class="message">尽力つきました...。答えは、{result}ですか？</p>
+            <button on:click={()=>{}}>はい</button>
+            <button on:click={()=>{}}>いいえ</button>
+            <button on:click={()=>{runAkinator(data["data"])}}>もういちど</button>
         {:else}
-        <p>おっと... 想定外の結果となりました。</p>
-        <button on:click={()=>{runAkinator(data["data"])}}>もういちど</button>
+            <p class="message">おっと... 想定外の結果となりました。</p>
+            <button on:click={()=>{runAkinator(data["data"])}}>もういちど</button>
         {/if}
+
     </div>
     <div class="right">
-        <ProbabilityView {prob} />
+        <ProbabilityView {prob} maxItems=5 />
     </div>
 </div>
 
@@ -216,4 +216,10 @@ width:400px;
 .right{
 width:420px;
 }
+
+p.message{
+    min-height: 50px;
+    margin: 30px 0px 10px 30px;
+}
+
 </style>

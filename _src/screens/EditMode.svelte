@@ -16,16 +16,17 @@
 </script>
 
 <button on:click={onBack}>Back</button>
-{#if file_loaded}
-<h2>Lets Edit.</h2>
+<h2>Edit Mode</h2>
+{#if !file_loaded}
+<h3>File selection</h3>
+<p>select a file!</p>
+<button on:click={() => {file_loaded=true} }>Load DEMO</button>
+{:else}
+<h3>Lets Edit.</h3>
 <p>let's edit!</p>
 <p><input type="range" min="0" max="100" value="50" /></p>
 <p><input type="range" min="0" max="100" value="50" /></p>
 <p><input type="range" min="0" max="100" value="50" /></p>
 <p><input type="range" min="0" max="100" value="50" /></p>
 <button on:click={() => {file_loaded=false} }>Clear DEMO</button>
-{:else}
-<h2>Edit Mode</h2>
-<p>select a file!</p>
-<button on:click={() => {file_loaded=true} }>Load DEMO</button>
 {/if}

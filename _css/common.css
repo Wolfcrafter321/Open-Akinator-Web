@@ -1,6 +1,8 @@
 ﻿* {
     margin: 0;
     padding: 0;
+
+    font-family: "Noto Sans JP", sans-serif;
 }
 
 #wrapper {
@@ -15,3 +17,29 @@
 hr {
     margin: 20px 0 20px;
 }
+
+button:not(:last-child){
+    margin-right: 15px;
+}
+
+
+/* 
+.noto-sans-jp-<uniquifier> {
+  font-family: "Noto Sans JP", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+
+.m-plus-1-code-<uniquifier> {
+  font-family: "M PLUS 1 Code", monospace;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+
+.carter-one-regular {
+  font-family: "Carter One", system-ui;
+  font-weight: 400;
+  font-style: normal;
+} */
