@@ -8,6 +8,19 @@
 
     console.log(data)
 
+    
+    let characters = null
+    let questions = null
+    
+    let prob = {}
+    let remainingKeys = []
+    let step = 1
+    let currentQuestion = null 
+    let result = null
+    let app_status = "standby" // "standby" | "asking" | "finished" | "no_more_questions"
+
+    const UNKNOWN = 0.5
+
     function matchFactor(featureVal, answer){
         return 1.0 - Math.abs(featureVal - answer)
     }
@@ -15,63 +28,56 @@
     function entropy(p){
 
         if(p === 0 || p === 1) return 0
-
         return -p * Math.log2(p) - (1-p) * Math.log2(1-p)
     }
-    
-    function updateProbabilities(characters, prob, questionKey, answer){
-        let newProb = {}
 
-        for (const c of characters){
-            const name = c.name
-            const featureVal = c.features[questionKey]
-
-            const k = (featureVal === undefined) ?
-                1.0 : 
-                matchFactor(featureVal, answer)
-
-            newProb[name] = (prob[name] ?? 0) * k
-        }
-
+    function normalize(prob){
         // normalize
-        const total = Object.values(newProb).reduce((a, b) => a + b, 0)
+        const total = Object.values(prob).reduce((a, b) => a + b, 0)
 
         if (!Number.isFinite(total) || total <= 0){
             // 全滅したらリセット、またはそのまま返す
             const uniform = 1 / characters.length
-            for (const name in newProb) {
-                newProb[name] = uniform
+            for (const name in prob) {
+                prob[name] = uniform
             }
-            return newProb
+            return prob
         }
 
-        for (const name in newProb){
-            newProb[name] /= total
+        for (const name in prob){
+            prob[name] /= total
         }
+
+        return prob
+    }
+    
+    function updateProbabilities(prob, questionKey, answer){
+        let newProb = {}
+
+        for (const c of Object.keys(characters)){
+            const name = c
+            const featureVal = characters[c].features?.[questionKey] ?? UNKNOWN
+            const k = matchFactor(featureVal, answer)
+            newProb[name] = (prob[name] ?? 0) * k
+        }
+
+        // normalize
+        newProb = normalize(newProb)
 
         return newProb
     }
 
     // function chooseBestQuestion(characters, remainingKeys){
-    function chooseBestQuestion(characters, remainingKeys, prob){
+    function chooseBestQuestion(remainingKeys, prob){
         let bestKey = null
         let bestScore = -Infinity
 
         for (const key of remainingKeys){
            
-            let p
-
-            // let sum = 0
-            // for(const c of characters){
-            //     sum += (c.features[key] ?? 0)
-            // }
-            // p = sum / characters.length
-            
-            // p = Σ (prob[character] * feature_value)
-            p = 0
-            for(const c of characters){
-                const val = c.features[key] ?? 0
-                p += (prob[c.name] ?? 0) * val
+            let p = 0
+            for(const c of Object.keys(characters)){
+                const val = characters[c].features[key] ?? 0
+                p += (prob[c] ?? 0) * val
             }
 
             const score = entropy(p)
@@ -86,9 +92,9 @@
         return bestKey
     }
 
-    function collectAllFeatureKeys(characters) {
+    function collectAllFeatureKeys() {
         const set = new Set()
-        for (const c of characters) {
+        for (const c of Object.values(characters)) {
             for (const k in c.features) {
                 set.add(k)
             }
@@ -98,22 +104,16 @@
     }
 
 
-    let prob = {}
-    let remainingKeys = []
-    let step = 1
-
-    let currentQuestion = null 
-    let result = null
-    let app_status = "standby" // "standby" | "asking" | "finished" | "no_more_questions"
 
     // run akinator!
-    function runAkinator(characters){
+    function runAkinator(){
         prob = {}
-        for(const c of characters){
-            prob[c.name] = 1 / characters.length
+        const chars = Object.keys(characters)
+        for(const c of chars){
+            prob[c] = 1 / chars.length
         }
 
-        remainingKeys = collectAllFeatureKeys(characters)
+        remainingKeys = collectAllFeatureKeys()
 
         step = 1
         app_status = "asking"
@@ -145,8 +145,7 @@
             return
         }
 
-        // currentQuestion = chooseBestQuestion(data["data"], remainingKeys)
-        currentQuestion = chooseBestQuestion(data["data"], remainingKeys, prob)
+        currentQuestion = chooseBestQuestion(remainingKeys, prob)
         remainingKeys = remainingKeys.filter(k => k !== currentQuestion)
 
         console.log(prob)
@@ -154,7 +153,6 @@
 
     function answer(ans){
         prob = updateProbabilities(
-            data["data"],
             prob,
             currentQuestion,
             ans
@@ -164,20 +162,25 @@
     }
 
     onMount(()=>{
-        if(data) runAkinator(data["data"])
+        if (!data) return
+        
+        characters = data["data"]["answers"]
+        questions = data["data"]["questions"]
+
+        runAkinator()
     })
 
 </script>
 
 
 
+<button on:click={onBack}>Back</button>
 <div class="content">
     <div class="left">
-        <button on:click={onBack}>Back</button>
         <h2>Now Akinate!</h2>
 
         {#if app_status === "asking"}
-            <p class="message">質問 : {currentQuestion}</p>
+            <p class="message">質問 : {questions[currentQuestion]?.ja ?? currentQuestion}</p>
             <button on:click={()=>{answer(1.0)}}>はい</button>
             <button on:click={()=>{answer(0.0)}}>いいえ</button>
             <button on:click={()=>{answer(0.5)}}>どうだろう、わからない</button>
@@ -193,12 +196,11 @@
             <button on:click={()=>{runAkinator(data["data"])}}>もういちど</button>
         {:else}
             <p class="message">おっと... 想定外の結果となりました。</p>
-            <button on:click={()=>{runAkinator(data["data"])}}>もういちど</button>
         {/if}
 
     </div>
     <div class="right">
-        <ProbabilityView {prob} maxItems=5 />
+        <!-- <ProbabilityView {prob} maxItems=5 /> -->
     </div>
 </div>
 

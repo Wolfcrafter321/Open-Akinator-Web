@@ -31,7 +31,7 @@
 
     async function onStartDemo(e) {
         try {
-            const res = await fetch("/_src/data/data demo.json")
+            const res = await fetch("/_src/data/data dora.json")
             const json = await res.json()
 
             onStart({

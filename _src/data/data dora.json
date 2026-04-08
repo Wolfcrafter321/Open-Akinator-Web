@@ -1,0 +1,78 @@
+{
+    "questions": {
+        "is_human": {
+            "enable": true,
+            "us": "Is human?",
+            "ja": "にんげんですか？"
+        },
+        "can_fly": {
+            "enable": true,
+            "us": "Can fly?",
+            "ja": "空を飛べますか？"
+        },
+        "can_use_magic": {
+            "enable": true,
+            "us": "Can use magic?",
+            "ja": "魔法が使えますか？"
+        },
+        "is_robot": {
+            "enable": true,
+            "us": "Is robot?",
+            "ja": "ロボットですか？"
+        },
+        "has_pocket": {
+            "enable": true,
+            "us": "Has pocket?",
+            "ja": "ポケットがありますか？"
+        },
+        "pink_shirt": {
+            "enable": true,
+            "us": "pink shirt ?",
+            "ja": "ピンクの服を着ていますか？"
+        }
+    },
+    "answers": {
+        "Dora": {
+            "name": {
+                "us": "Dora",
+                "ja": "Dora"
+            },
+            "features": {
+                "is_human": 0.1,
+                "can_fly": 0.9,
+                "can_use_magic": 0.8,
+                "is_robot": 1.0,
+                "has_pocket": 1.0,
+                "pink_shirt": 0.0
+            }
+        },
+        "Nobi": {
+            "name": {
+                "us": "Nobi",
+                "ja": "Nobi"
+            },
+            "features": {
+                "is_human": 1.0,
+                "can_fly": 0.0,
+                "can_use_magic": 0.0,
+                "is_robot": 0.0,
+                "has_pocket": 0.0,
+                "pink_shirt": 0.0
+            }
+        },
+        "Shizu": {
+            "name": {
+                "us": "Shizu",
+                "ja": "Shizu"
+            },
+            "features": {
+                "is_human": 1.0,
+                "can_fly": 0.0,
+                "can_use_magic": 0.0,
+                "is_robot": 0.0,
+                "has_pocket": 0.0,
+                "pink_shirt": 1.0
+            }
+        }
+    }
+}
