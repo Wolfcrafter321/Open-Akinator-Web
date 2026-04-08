@@ -1,78 +1,58 @@
 {
-    "questions": {
-        "is_human": {
-            "enable": true,
-            "us": "Is human?",
-            "ja": "にんげんですか？"
-        },
-        "can_fly": {
-            "enable": true,
-            "us": "Can fly?",
-            "ja": "空を飛べますか？"
-        },
-        "can_use_magic": {
-            "enable": true,
-            "us": "Can use magic?",
-            "ja": "魔法が使えますか？"
-        },
-        "is_robot": {
-            "enable": true,
-            "us": "Is robot?",
-            "ja": "ロボットですか？"
-        },
-        "has_pocket": {
-            "enable": true,
-            "us": "Has pocket?",
-            "ja": "ポケットがありますか？"
-        },
-        "pink_shirt": {
-            "enable": true,
-            "us": "pink shirt ?",
-            "ja": "ピンクの服を着ていますか？"
-        }
-    },
-    "answers": {
-        "Dora": {
-            "name": {
-                "us": "Dora",
-                "ja": "Dora"
-            },
-            "features": {
-                "is_human": 0.1,
-                "can_fly": 0.9,
-                "can_use_magic": 0.8,
-                "is_robot": 1.0,
-                "has_pocket": 1.0,
-                "pink_shirt": 0.0
-            }
-        },
-        "Nobi": {
-            "name": {
-                "us": "Nobi",
-                "ja": "Nobi"
-            },
-            "features": {
-                "is_human": 1.0,
-                "can_fly": 0.0,
-                "can_use_magic": 0.0,
-                "is_robot": 0.0,
-                "has_pocket": 0.0,
-                "pink_shirt": 0.0
-            }
-        },
-        "Shizu": {
-            "name": {
-                "us": "Shizu",
-                "ja": "Shizu"
-            },
-            "features": {
-                "is_human": 1.0,
-                "can_fly": 0.0,
-                "can_use_magic": 0.0,
-                "is_robot": 0.0,
-                "has_pocket": 0.0,
-                "pink_shirt": 1.0
-            }
-        }
-    }
+  "questions": {
+    "is_human": {"enable":true,"us":"Is human?","ja":"人間ですか？"},
+    "is_robot": {"enable":true,"us":"Is robot?","ja":"ロボットですか？"},
+    "is_animal": {"enable":true,"us":"Is animal?","ja":"動物ですか？"},
+    "is_child": {"enable":true,"us":"Is child?","ja":"子供ですか？"},
+    "is_girl": {"enable":true,"us":"Is female?","ja":"女性ですか？"},
+    "wears_glasses": {"enable":true,"us":"Wears glasses?","ja":"メガネをかけていますか？"},
+    "can_fly": {"enable":true,"us":"Can fly?","ja":"空を飛べますか？"},
+    "can_use_magic": {"enable":true,"us":"Has magical abilities?","ja":"魔法のような能力がありますか？"},
+    "has_pocket": {"enable":true,"us":"Has four-dimensional pocket?","ja":"四次元ポケットがありますか？"},
+    "good_at_sports": {"enable":true,"us":"Good at sports?","ja":"運動が得意ですか？"},
+    "smart": {"enable":true,"us":"Very smart?","ja":"とても頭が良いですか？"},
+    "kind_person": {"enable":true,"us":"Kind personality?","ja":"優しい性格ですか？"},
+    "rich_family": {"enable":true,"us":"From rich family?","ja":"お金持ちの家ですか？"},
+    "sings_often": {"enable":true,"us":"Sings often?","ja":"よく歌いますか？"},
+    "likes_sleeping": {"enable":true,"us":"Likes sleeping?","ja":"昼寝が好きですか？"},
+    "blue_body": {"enable":true,"us":"Has blue body?","ja":"体が青いですか？"},
+    "yellow_body": {"enable":true,"us":"Has yellow body?","ja":"体が黄色ですか？"},
+    "is_future_person": {"enable":true,"us":"From the future?","ja":"未来から来ましたか？"},
+    "is_family": {"enable":true,"us":"Family member of Nobita?","ja":"のび太の家族ですか？"},
+    "appears_in_movies": {"enable":true,"us":"Important in movies?","ja":"映画で重要な役ですか？"}
+  },
+
+  "answers": {
+
+    "Doraemon":{"name":{"us":"Doraemon","ja":"ドラえもん"},"features":{"is_human":0,"is_robot":1,"is_animal":0.4,"is_child":0,"is_girl":0,"wears_glasses":0,"can_fly":0.9,"can_use_magic":0.8,"has_pocket":1,"good_at_sports":0.3,"smart":0.7,"kind_person":0.9,"rich_family":0,"sings_often":0.2,"likes_sleeping":0.7,"blue_body":1,"yellow_body":0,"is_future_person":1,"is_family":0.4,"appears_in_movies":1}},
+
+    "Dorami":{"name":{"us":"Dorami","ja":"ドラミ"},"features":{"is_human":0,"is_robot":1,"is_animal":0.4,"is_child":0,"is_girl":1,"wears_glasses":0,"can_fly":0.9,"can_use_magic":0.8,"has_pocket":1,"good_at_sports":0.6,"smart":0.9,"kind_person":0.9,"rich_family":0,"sings_often":0.3,"likes_sleeping":0.4,"blue_body":0,"yellow_body":1,"is_future_person":1,"is_family":0.4,"appears_in_movies":1}},
+
+    "MiniDora":{"name":{"us":"Mini-Dora","ja":"ミニドラ"},"features":{"is_human":0,"is_robot":1,"is_animal":0.5,"is_child":0,"is_girl":0.2,"wears_glasses":0,"can_fly":0.8,"can_use_magic":0.7,"has_pocket":0.8,"good_at_sports":0.4,"smart":0.5,"kind_person":0.7,"rich_family":0,"sings_often":0.2,"likes_sleeping":0.4,"blue_body":0.6,"yellow_body":0,"is_future_person":1,"is_family":0,"appears_in_movies":0.7}},
+
+    "Nobita":{"name":{"us":"Nobita Nobi","ja":"野比のび太"},"features":{"is_human":1,"is_robot":0,"is_animal":0,"is_child":1,"is_girl":0,"wears_glasses":1,"can_fly":0,"can_use_magic":0,"has_pocket":0,"good_at_sports":0,"smart":0.2,"kind_person":0.9,"rich_family":0,"sings_often":0.1,"likes_sleeping":0.9,"blue_body":0,"yellow_body":0,"is_future_person":0,"is_family":1,"appears_in_movies":1}},
+
+    "Shizuka":{"name":{"us":"Shizuka Minamoto","ja":"源静香"},"features":{"is_human":1,"is_robot":0,"is_animal":0,"is_child":1,"is_girl":1,"wears_glasses":0,"can_fly":0,"can_use_magic":0,"has_pocket":0,"good_at_sports":0.5,"smart":0.8,"kind_person":0.9,"rich_family":0.2,"sings_often":0.3,"likes_sleeping":0.3,"blue_body":0,"yellow_body":0,"is_future_person":0,"is_family":0,"appears_in_movies":1}},
+
+    "Gian":{"name":{"us":"Takeshi Goda","ja":"剛田武"},"features":{"is_human":1,"is_robot":0,"is_animal":0,"is_child":1,"is_girl":0,"wears_glasses":0,"can_fly":0,"can_use_magic":0,"has_pocket":0,"good_at_sports":0.9,"smart":0.3,"kind_person":0.3,"rich_family":0.2,"sings_often":1,"likes_sleeping":0.3,"blue_body":0,"yellow_body":0,"is_future_person":0,"is_family":0,"appears_in_movies":1}},
+
+    "Suneo":{"name":{"us":"Suneo Honekawa","ja":"骨川スネ夫"},"features":{"is_human":1,"is_robot":0,"is_animal":0,"is_child":1,"is_girl":0,"wears_glasses":0,"can_fly":0,"can_use_magic":0,"has_pocket":0,"good_at_sports":0.4,"smart":0.6,"kind_person":0.3,"rich_family":1,"sings_often":0.2,"likes_sleeping":0.4,"blue_body":0,"yellow_body":0,"is_future_person":0,"is_family":0,"appears_in_movies":1}},
+
+    "Dekisugi":{"name":{"us":"Hidetoshi Dekisugi","ja":"出木杉英才"},"features":{"is_human":1,"is_robot":0,"is_animal":0,"is_child":1,"is_girl":0,"wears_glasses":0.2,"can_fly":0,"can_use_magic":0,"has_pocket":0,"good_at_sports":0.7,"smart":1,"kind_person":0.9,"rich_family":0.5,"sings_often":0.2,"likes_sleeping":0.2,"blue_body":0,"yellow_body":0,"is_future_person":0,"is_family":0,"appears_in_movies":0.8}},
+
+    "Jaiko":{"name":{"us":"Jaiko","ja":"ジャイ子"},"features":{"is_human":1,"is_robot":0,"is_animal":0,"is_child":1,"is_girl":1,"wears_glasses":0,"can_fly":0,"can_use_magic":0,"has_pocket":0,"good_at_sports":0.3,"smart":0.5,"kind_person":0.7,"rich_family":0.2,"sings_often":0.3,"likes_sleeping":0.4,"blue_body":0,"yellow_body":0,"is_future_person":0,"is_family":0,"appears_in_movies":0.5}},
+
+    "Tamako":{"name":{"us":"Tamako Nobi","ja":"野比玉子"},"features":{"is_human":1,"is_robot":0,"is_animal":0,"is_child":0,"is_girl":1,"wears_glasses":1,"can_fly":0,"can_use_magic":0,"has_pocket":0,"good_at_sports":0.2,"smart":0.6,"kind_person":0.6,"rich_family":0,"sings_often":0.1,"likes_sleeping":0.2,"blue_body":0,"yellow_body":0,"is_future_person":0,"is_family":1,"appears_in_movies":0.4}},
+
+    "Nobisuke":{"name":{"us":"Nobisuke Nobi","ja":"野比のび助"},"features":{"is_human":1,"is_robot":0,"is_animal":0,"is_child":0,"is_girl":0,"wears_glasses":0.2,"can_fly":0,"can_use_magic":0,"has_pocket":0,"good_at_sports":0.4,"smart":0.6,"kind_person":0.8,"rich_family":0,"sings_often":0.2,"likes_sleeping":0.4,"blue_body":0,"yellow_body":0,"is_future_person":0,"is_family":1,"appears_in_movies":0.4}},
+
+    "Sewashi":{"name":{"us":"Sewashi","ja":"セワシ"},"features":{"is_human":1,"is_robot":0,"is_animal":0,"is_child":1,"is_girl":0,"wears_glasses":0,"can_fly":0,"can_use_magic":0,"has_pocket":0,"good_at_sports":0.4,"smart":0.8,"kind_person":0.8,"rich_family":0.3,"sings_often":0.1,"likes_sleeping":0.3,"blue_body":0,"yellow_body":0,"is_future_person":1,"is_family":1,"appears_in_movies":0.7}},
+
+    "GianMother":{"name":{"us":"Gian's Mother","ja":"ジャイアンの母"},"features":{"is_human":1,"is_robot":0,"is_animal":0,"is_child":0,"is_girl":1,"wears_glasses":0.1,"can_fly":0,"can_use_magic":0,"has_pocket":0,"good_at_sports":0.4,"smart":0.5,"kind_person":0.4,"rich_family":0.3,"sings_often":0.1,"likes_sleeping":0.2,"blue_body":0,"yellow_body":0,"is_future_person":0,"is_family":0,"appears_in_movies":0.3}},
+
+    "SuneoMother":{"name":{"us":"Suneo's Mother","ja":"スネ夫のママ"},"features":{"is_human":1,"is_robot":0,"is_animal":0,"is_child":0,"is_girl":1,"wears_glasses":0,"can_fly":0,"can_use_magic":0,"has_pocket":0,"good_at_sports":0.2,"smart":0.6,"kind_person":0.5,"rich_family":1,"sings_often":0.2,"likes_sleeping":0.2,"blue_body":0,"yellow_body":0,"is_future_person":0,"is_family":0,"appears_in_movies":0.3}},
+
+    "NobitaGrandmother":{"name":{"us":"Nobita's Grandmother","ja":"のび太のおばあちゃん"},"features":{"is_human":1,"is_robot":0,"is_animal":0,"is_child":0,"is_girl":1,"wears_glasses":0.3,"can_fly":0,"can_use_magic":0,"has_pocket":0,"good_at_sports":0.1,"smart":0.6,"kind_person":1,"rich_family":0,"sings_often":0.1,"likes_sleeping":0.5,"blue_body":0,"yellow_body":0,"is_future_person":0,"is_family":1,"appears_in_movies":0.6}}
+
+  }
 }

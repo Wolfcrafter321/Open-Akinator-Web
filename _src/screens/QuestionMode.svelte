@@ -129,9 +129,11 @@
         for (const name in prob){
             if(prob[name] > bestProb){
                 bestProb = prob[name]
-                bestName = name
+                bestName = characters[name].name
             }
         }
+
+        console.log(bestName)
 
         if (bestProb >= 0.9){                   // thresholdを超えて終了
             app_status = "finished"
@@ -185,12 +187,12 @@
             <button on:click={()=>{answer(0.0)}}>いいえ</button>
             <button on:click={()=>{answer(0.5)}}>どうだろう、わからない</button>
         {:else if app_status === "finished"}
-            <p class="message">答えは、{result}ですね！</p>
+            <p class="message">答えは、{result["ja"]}ですね！</p>
             <button on:click={()=>{}}>はい</button>
             <button on:click={()=>{}}>いいえ</button>
             <button on:click={()=>{runAkinator(data["data"])}}>もういちど</button>
         {:else if app_status === "no_more_questions"}
-            <p class="message">尽力つきました...。答えは、{result}ですか？</p>
+            <p class="message">尽力つきました...。答えは、{result["ja"]}ですか？</p>
             <button on:click={()=>{}}>はい</button>
             <button on:click={()=>{}}>いいえ</button>
             <button on:click={()=>{runAkinator(data["data"])}}>もういちど</button>
@@ -200,7 +202,7 @@
 
     </div>
     <div class="right">
-        <!-- <ProbabilityView {prob} maxItems=5 /> -->
+        <ProbabilityView {prob} {characters} maxItems=5 />
     </div>
 </div>
 

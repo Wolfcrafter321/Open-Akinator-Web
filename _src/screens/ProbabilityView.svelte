@@ -1,5 +1,6 @@
 ﻿<script>
     export let prob = {}
+    export let characters = {}
     let entries = []
     export let maxItems = 10
 
@@ -14,10 +15,10 @@
 <div class="panel">
     <h3>推論状況</h3>
 
-    {#each entries as [name, p]}
+    {#each entries as [key, p]}
     <div class="row">
 
-        <div class="name">{name}</div>
+        <div class="name">{characters[key]?.name?.ja ?? key}</div>
         <div class="bar">
         <div class="fill" style="width:{p*100}%"></div>
         </div>
